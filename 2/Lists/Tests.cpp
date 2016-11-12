@@ -1,31 +1,31 @@
 #include "gtest/gtest.h"
 #include "IntNode.h"
-#include "IntSLList.h"
+#include "SingleLinkedList.h"
 
-class IntSLListTest : public ::testing::Test
+class SingleLinkedListTest : public ::testing::Test
 {
 public:
-    IntSLList sut;
+    SingleLinkedList<int> sut;
 };
 
-TEST_F(IntSLListTest, newCreatedListIsEmpty)
+TEST_F(SingleLinkedListTest, newCreatedListIsEmpty)
 {
     ASSERT_TRUE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, listIsNotEmptyAfterHeadElementAddition)
+TEST_F(SingleLinkedListTest, listIsNotEmptyAfterHeadElementAddition)
 {
     sut.addToHead(1);
     ASSERT_FALSE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, listIsNotEmptyAfterTailElementAddition)
+TEST_F(SingleLinkedListTest, listIsNotEmptyAfterTailElementAddition)
 {
     sut.addToTail(1);
     ASSERT_FALSE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, hasElementsOnListAfterHeadAddition)
+TEST_F(SingleLinkedListTest, hasElementsOnListAfterHeadAddition)
 {
     sut.addToHead(1);
     sut.addToHead(2);
@@ -33,7 +33,7 @@ TEST_F(IntSLListTest, hasElementsOnListAfterHeadAddition)
     ASSERT_EQ("3 2 1", sut.toStr());
 }
 
-TEST_F(IntSLListTest, hasElementsOnListAfterTailAddition)
+TEST_F(SingleLinkedListTest, hasElementsOnListAfterTailAddition)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -41,12 +41,12 @@ TEST_F(IntSLListTest, hasElementsOnListAfterTailAddition)
     ASSERT_EQ("1 2 3", sut.toStr());
 }
 
-TEST_F(IntSLListTest, returnNullptrWhenFindingInEmptyList)
+TEST_F(SingleLinkedListTest, returnNullptrWhenFindingInEmptyList)
 {
     ASSERT_EQ(nullptr, sut.findNode(20));
 }
 
-TEST_F(IntSLListTest, returnCorrectElemWhenFindingForNonExistingItem)
+TEST_F(SingleLinkedListTest, returnCorrectElemWhenFindingForNonExistingItem)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -54,7 +54,7 @@ TEST_F(IntSLListTest, returnCorrectElemWhenFindingForNonExistingItem)
     ASSERT_EQ(nullptr, sut.findNode(20));
 }
 
-TEST_F(IntSLListTest, returnCorrectElemWhenFindingForExistingItem)
+TEST_F(SingleLinkedListTest, returnCorrectElemWhenFindingForExistingItem)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -62,14 +62,14 @@ TEST_F(IntSLListTest, returnCorrectElemWhenFindingForExistingItem)
     ASSERT_NE(nullptr, sut.findNode(2));
 }
 
-TEST_F(IntSLListTest, listIsEmptyAfterElementAdditionAndRemoval)
+TEST_F(SingleLinkedListTest, listIsEmptyAfterElementAdditionAndRemoval)
 {
     sut.addToTail(1);
     sut.removeNode(1);
     ASSERT_TRUE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, listIsEmptyAfterTwoElementAdditionsAndOneRemoval)
+TEST_F(SingleLinkedListTest, listIsEmptyAfterTwoElementAdditionsAndOneRemoval)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -77,7 +77,7 @@ TEST_F(IntSLListTest, listIsEmptyAfterTwoElementAdditionsAndOneRemoval)
     ASSERT_FALSE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, elemetIsCorrectlyRemovedFromFilledList)
+TEST_F(SingleLinkedListTest, elemetIsCorrectlyRemovedFromFilledList)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -89,14 +89,14 @@ TEST_F(IntSLListTest, elemetIsCorrectlyRemovedFromFilledList)
     ASSERT_EQ("1 3 5", sut.toStr());
 }
 
-TEST_F(IntSLListTest, listIsEmptyAfterRemovingOnlyElementFromTail)
+TEST_F(SingleLinkedListTest, listIsEmptyAfterRemovingOnlyElementFromTail)
 {
     sut.addToTail(1);
     sut.removeFromTail();
     ASSERT_TRUE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, listIsNotEmptyAfterRemovingElementFromTailButListContainsMultipleElements)
+TEST_F(SingleLinkedListTest, listIsNotEmptyAfterRemovingElementFromTailButListContainsMultipleElements)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -104,7 +104,7 @@ TEST_F(IntSLListTest, listIsNotEmptyAfterRemovingElementFromTailButListContainsM
     ASSERT_FALSE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, elementsAreCorrectlyRemovedFromTail)
+TEST_F(SingleLinkedListTest, elementsAreCorrectlyRemovedFromTail)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -113,14 +113,14 @@ TEST_F(IntSLListTest, elementsAreCorrectlyRemovedFromTail)
     ASSERT_EQ("1 2", sut.toStr());
 }
 
-TEST_F(IntSLListTest, listIsEmptyAfterRemovingOnlyElementFromHead)
+TEST_F(SingleLinkedListTest, listIsEmptyAfterRemovingOnlyElementFromHead)
 {
     sut.addToTail(1);
     sut.removeFromHead();
     ASSERT_TRUE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, listIsNotEmptyAfterRemovingElementFromHeadButListContainsMultipleElements)
+TEST_F(SingleLinkedListTest, listIsNotEmptyAfterRemovingElementFromHeadButListContainsMultipleElements)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -128,7 +128,7 @@ TEST_F(IntSLListTest, listIsNotEmptyAfterRemovingElementFromHeadButListContainsM
     ASSERT_FALSE(sut.isEmpty());
 }
 
-TEST_F(IntSLListTest, elementsAreCorrectlyRemovedFromHead)
+TEST_F(SingleLinkedListTest, elementsAreCorrectlyRemovedFromHead)
 {
     sut.addToTail(1);
     sut.addToTail(2);
@@ -137,12 +137,12 @@ TEST_F(IntSLListTest, elementsAreCorrectlyRemovedFromHead)
     ASSERT_EQ("2 3", sut.toStr());
 }
 
-TEST_F(IntSLListTest, shouldThrowExceptionAfterRemovingHeadElementFromEmptyList)
+TEST_F(SingleLinkedListTest, shouldThrowExceptionAfterRemovingHeadElementFromEmptyList)
 {
     ASSERT_THROW(sut.removeFromHead(), std::string);
 }
 
-TEST_F(IntSLListTest, shouldThrowExceptionAfterRemovingTailElementFromEmptyList)
+TEST_F(SingleLinkedListTest, shouldThrowExceptionAfterRemovingTailElementFromEmptyList)
 {
     ASSERT_THROW(sut.removeFromTail(), std::string);
 }

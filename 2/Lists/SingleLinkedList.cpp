@@ -1,7 +1,9 @@
-#include "IntSLList.h"
+#include "SingleLinkedList.h"
 #include <iostream>
 
-IntSLList::~IntSLList()
+
+template <typename T>
+SingleLinkedList<T>::~SingleLinkedList()
 {
     auto temp = head;
     while (temp)
@@ -12,22 +14,23 @@ IntSLList::~IntSLList()
     }
 }
 
-bool IntSLList::isEmpty() const
+template <typename T>
+bool SingleLinkedList<T>::isEmpty() const
 {
     return (head == nullptr);
 }
 
-void IntSLList::addToHead(int value)
+template <typename T>
+void SingleLinkedList<T>::addToHead(T value)
 {
-    m_isEmpty = false;
-    head = new IntNode(value, head);
+    head = new IntNode<T>(value, head);
     if (tail == nullptr) tail = head;
 }
 
-void IntSLList::addToTail(int value)
+template <typename T>
+void SingleLinkedList<T>::addToTail(T value)
 {
-    m_isEmpty = false;
-    IntNode * tempNode = new IntNode(value);
+    auto tempNode = new IntNode<T>(value);
     if (tail == nullptr)
     {
         head = tail = tempNode;
@@ -39,12 +42,14 @@ void IntSLList::addToTail(int value)
     }
 }
 
-IntNode *IntSLList::findNode(int value)
+template <typename T>
+IntNode<T> *SingleLinkedList<T>::findNode(T value)
 {
     return findNodeAndItsPrev(value).second;
 }
 
-void IntSLList::removeNode(int value)
+template <typename T>
+void SingleLinkedList<T>::removeNode(T value)
 {
     auto foundNode = findNodeAndItsPrev(value);
 
@@ -64,7 +69,8 @@ void IntSLList::removeNode(int value)
     delete foundNode.second;
 }
 
-int IntSLList::removeFromTail()
+template <typename T>
+int SingleLinkedList<T>::removeFromTail()
 {
     if (tail == nullptr)
         throw std::string("List is empty");
@@ -87,7 +93,8 @@ int IntSLList::removeFromTail()
     return value;
 }
 
-int IntSLList::removeFromHead()
+template <typename T>
+int SingleLinkedList<T>::removeFromHead()
 {
     if (head == nullptr)
     {
@@ -110,7 +117,8 @@ int IntSLList::removeFromHead()
     return value;
 }
 
-std::string IntSLList::toStr() const
+template <typename T>
+std::string SingleLinkedList<T>::toStr() const
 {
     auto tempPtr = head;
     std::string tempStr {};
@@ -126,25 +134,27 @@ std::string IntSLList::toStr() const
     return tempStr;
 }
 
-std::pair<IntNode*, IntNode*> IntSLList::findNodeAndItsPrev(int value)
+template <typename T>
+std::pair<IntNode<T> *, IntNode<T> *> SingleLinkedList<T>::findNodeAndItsPrev(int value)
 {
     auto temp = head;
-    IntNode* tempPrev = nullptr;
+    IntNode<T>* tempPrev = nullptr;
 
     while (temp)
     {
         if (temp->info == value)
         {
-            return std::pair<IntNode*, IntNode*>(tempPrev, temp);
+            return std::pair<IntNode<T>*, IntNode<T>*>(tempPrev, temp);
         }
         tempPrev = temp;
         temp = temp->next;
     }
 
-    return std::pair<IntNode*, IntNode*>(nullptr, nullptr);
+    return std::pair<IntNode<T>*, IntNode<T>*>(nullptr, nullptr);
 }
 
-IntNode *IntSLList::findNodePrevToTail()
+template <typename T>
+IntNode<T> *SingleLinkedList<T>::findNodePrevToTail()
 {
     auto temp = head;
 
@@ -159,3 +169,5 @@ IntNode *IntSLList::findNodePrevToTail()
 
     return nullptr;
 }
+
+template class SingleLinkedList<int>;

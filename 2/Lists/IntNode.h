@@ -1,10 +1,11 @@
 #pragma once
 
+template <typename T>
 class IntNode
 {
 public:
-    IntNode(int _info = 0, IntNode *_next = nullptr) : info(_info), next(_next) {}
+    IntNode(T _info = 0, IntNode *_next = nullptr) : info(_info), next(_next) {}
 
-    int info;
+    T info;
     IntNode *next;
 };

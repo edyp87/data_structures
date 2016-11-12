@@ -23,14 +23,14 @@ bool SingleLinkedList<T>::isEmpty() const
 template <typename T>
 void SingleLinkedList<T>::addToHead(T value)
 {
-    head = new IntNode<T>(value, head);
+    head = new SingleLinkedNode<T>(value, head);
     if (tail == nullptr) tail = head;
 }
 
 template <typename T>
 void SingleLinkedList<T>::addToTail(T value)
 {
-    auto tempNode = new IntNode<T>(value);
+    auto tempNode = new SingleLinkedNode<T>(value);
     if (tail == nullptr)
     {
         head = tail = tempNode;
@@ -43,7 +43,7 @@ void SingleLinkedList<T>::addToTail(T value)
 }
 
 template <typename T>
-IntNode<T> *SingleLinkedList<T>::findNode(T value)
+SingleLinkedNode<T> *SingleLinkedList<T>::findNode(T value)
 {
     return findNodeAndItsPrev(value).second;
 }
@@ -135,26 +135,26 @@ std::string SingleLinkedList<T>::toStr() const
 }
 
 template <typename T>
-std::pair<IntNode<T> *, IntNode<T> *> SingleLinkedList<T>::findNodeAndItsPrev(int value)
+std::pair<SingleLinkedNode<T> *, SingleLinkedNode<T> *> SingleLinkedList<T>::findNodeAndItsPrev(int value)
 {
     auto temp = head;
-    IntNode<T>* tempPrev = nullptr;
+    SingleLinkedNode<T>* tempPrev = nullptr;
 
     while (temp)
     {
         if (temp->info == value)
         {
-            return std::pair<IntNode<T>*, IntNode<T>*>(tempPrev, temp);
+            return std::pair<SingleLinkedNode<T>*, SingleLinkedNode<T>*>(tempPrev, temp);
         }
         tempPrev = temp;
         temp = temp->next;
     }
 
-    return std::pair<IntNode<T>*, IntNode<T>*>(nullptr, nullptr);
+    return std::pair<SingleLinkedNode<T>*, SingleLinkedNode<T>*>(nullptr, nullptr);
 }
 
 template <typename T>
-IntNode<T> *SingleLinkedList<T>::findNodePrevToTail()
+SingleLinkedNode<T> *SingleLinkedList<T>::findNodePrevToTail()
 {
     auto temp = head;
 

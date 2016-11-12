@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IntNode.h"
+#include "SingleLinkedNode.h"
 #include <string>
 
 template <typename T>
@@ -14,16 +14,16 @@ public:
     bool isEmpty() const;
     void addToHead(T value);
     void addToTail(T value);
-    IntNode<T>* findNode(T value);
+    SingleLinkedNode<T>* findNode(T value);
     void removeNode(T value);
     int removeFromTail();
     int removeFromHead();
     std::string toStr() const;
 
 private:
-    std::pair<IntNode<T> *, IntNode<T> *> findNodeAndItsPrev(int value);
-    IntNode<T>* findNodePrevToTail();
+    std::pair<SingleLinkedNode<T> *, SingleLinkedNode<T> *> findNodeAndItsPrev(int value);
+    SingleLinkedNode<T>* findNodePrevToTail();
 
-    IntNode<T> *head;
-    IntNode<T> *tail;
+    SingleLinkedNode<T> *head;
+    SingleLinkedNode<T> *tail;
 };

@@ -1,5 +1,5 @@
 #include "gtest/gtest.h"
-#include "IntNode.h"
+#include "SingleLinkedNode.h"
 #include "SingleLinkedList.h"
 
 class SingleLinkedListTest : public ::testing::Test

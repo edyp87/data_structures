@@ -98,7 +98,7 @@ bool SingleCyclicList<T>::hasOnlyOneElement() const
 template <typename T>
 std::pair<SingleLinkedNode<T> *, SingleLinkedNode<T> *> SingleCyclicList<T>::findNodeAndItsPrev(int value)
 {
-    if (isEmpty()) return std::pair<SingleLinkedNode<T>*, SingleLinkedNode<T>*>(nullptr, nullptr);
+    if (isEmpty()) return { nullptr, nullptr };
 
     auto temp = tail->next;
     SingleLinkedNode<T>* tempPrev = tail;
@@ -107,14 +107,14 @@ std::pair<SingleLinkedNode<T> *, SingleLinkedNode<T> *> SingleCyclicList<T>::fin
     {
         if (temp->info == value)
         {
-            return std::pair<SingleLinkedNode<T>*, SingleLinkedNode<T>*>(tempPrev, temp);
+            return { tempPrev, temp };
         }
         tempPrev = temp;
         temp = temp->next;
     }
     while (temp != tail->next);
 
-    return std::pair<SingleLinkedNode<T>*, SingleLinkedNode<T>*>(nullptr, nullptr);
+    return { nullptr, nullptr };
 }
 
 template class SingleCyclicList<int>;

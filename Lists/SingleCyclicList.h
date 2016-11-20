@@ -19,6 +19,7 @@ public:
     std::string toStr() const;
 
 private:
+    bool hasOnlyOneElement() const;
     std::pair<SingleLinkedNode<T> *, SingleLinkedNode<T> *> findNodeAndItsPrev(int value);
 
     SingleLinkedNode<T> *tail;

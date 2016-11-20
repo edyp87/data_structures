@@ -49,13 +49,12 @@ SingleLinkedNode<T> *SingleCyclicList<T>::findNode(T value)
 template <typename T>
 void SingleCyclicList<T>::removeNode(T value)
 {
-    if (isEmpty()) return;
-
     auto nodeAndItsPrev = findNodeAndItsPrev(value);
 
-    if (nodeAndItsPrev.first == nodeAndItsPrev.second)
+    if (not nodeAndItsPrev.first) return;
+
+    if (hasOnlyOneElement())
     {
-        delete nodeAndItsPrev.first;
         tail = nullptr;
     }
     else
@@ -64,10 +63,9 @@ void SingleCyclicList<T>::removeNode(T value)
         if (nodeAndItsPrev.second == tail)
         {
             tail = nodeAndItsPrev.first;
-
         }
-        delete nodeAndItsPrev.second;
     }
+    delete nodeAndItsPrev.second;
 }
 
 template <typename T>
@@ -89,6 +87,12 @@ std::string SingleCyclicList<T>::toStr() const
     if (not tempStr.empty()) tempStr.pop_back();
 
     return tempStr;
+}
+
+template <typename T>
+bool SingleCyclicList<T>::hasOnlyOneElement() const
+{
+    return tail->next == tail;
 }
 
 template <typename T>

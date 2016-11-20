@@ -26,6 +26,14 @@ TEST_F(SingleCyclicListTest, hasElementsOnListAfterAddition)
     ASSERT_EQ("1 2 3", sut.toStr());
 }
 
+TEST_F(SingleCyclicListTest, removingNonexistentElementHasNoEffect)
+{
+    sut.add(1);
+    sut.removeNode(4);
+    ASSERT_EQ("1", sut.toStr());
+}
+
+
 TEST_F(SingleCyclicListTest, returnNullptrWhenFindingInEmptyList)
 {
     ASSERT_EQ(nullptr, sut.findNode(20));
@@ -76,10 +84,13 @@ TEST_F(SingleCyclicListTest, elemetIsCorrectlyRemovedFromFilledList)
     sut.add(3);
     sut.add(4);
     sut.add(5);
-    ASSERT_EQ("1 2 3 4 5", sut.toStr());
+    sut.add(6);
+    ASSERT_EQ("1 2 3 4 5 6", sut.toStr());
     sut.removeNode(2);
     sut.removeNode(4);
+    ASSERT_EQ("1 3 5 6", sut.toStr());
+    sut.removeNode(6);
     ASSERT_EQ("1 3 5", sut.toStr());
-    sut.removeNode(5);
-    ASSERT_EQ("1 3", sut.toStr());
+    sut.removeNode(1);
+    ASSERT_EQ("3 5", sut.toStr());
 }
